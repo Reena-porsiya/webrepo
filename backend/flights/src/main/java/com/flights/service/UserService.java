@@ -1,5 +1,6 @@
 package com.flights.service;
 
-public interface UserService {
 
+public interface UserService {
+    boolean authenticateUser(String username, String password);
 }

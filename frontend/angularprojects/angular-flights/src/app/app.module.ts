@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { CreateCountryComponent } from './create-country/create-country.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateCountryComponent,
+    CreateUserComponent,
+    UserComponent,
    
   ],
   imports: [

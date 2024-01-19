@@ -1,32 +1,38 @@
 package com.flights.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.flights.model.User;
-import com.flights.service.UserService;
+import com.flights.business.UserBusiness;
 
-@RestController
-@RequestMapping("/users")
+@Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserBusiness userBusiness;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        User user = userService.getUserById(userId);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @Autowired
+    public UserController(UserBusiness userBusiness) {
+        this.userBusiness = userBusiness;
     }
 
-    // Other user-related endpoints such as user creation, update, delete, etc.
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(String username, String password, Model model) {
+        // Call the login method from the business class
+        boolean loginSuccess = userBusiness.loginUser(username, password);
+
+        if (loginSuccess) {
+            return "redirect:/dashboard";
+        } else {
+            model.addAttribute("error", "Invalid credentials");
+            return "login";
+        }
+    }
 }
