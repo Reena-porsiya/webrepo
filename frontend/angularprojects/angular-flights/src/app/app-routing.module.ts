@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateCountryComponent } from './create-country/create-country.component';
+import {UserComponent} from './user/user.component';
 
 const routes: Routes = [
-  { path: 'addcountry', component: CreateCountryComponent }
+  { path: 'user', component: UserComponent }
 ];
 
 @NgModule({

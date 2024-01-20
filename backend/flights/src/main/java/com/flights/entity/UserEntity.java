@@ -1,39 +1,32 @@
 package com.flights.entity;
 
-
-import java.io.Serializable;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class UserEntity {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(name = "userid")
+    private int userid;
+    
+    @Column(name = "username")
     private String username;
+    
+    @Column(name = "password")
     private String password;
+    
+    @Column(name = "client_id")
+    private int clientid;
 
-    // Constructors, getters, setters
-
-    // Omitted other details for brevity
-
-    // Getters and setters
-
-    // Constructors
-
-    // equals, hashCode, and other methods
-
-    public Long getId() {
-		return id;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -52,31 +45,15 @@ public class UserEntity {
 		this.password = password;
 	}
 
-	// Nested class for composite primary key
-    public static class UserEntityId implements Serializable {
-        private Long id;
-        private String username;
+	public int getClientid() {
+		return clientid;
+	}
 
-        // Constructors, equals, and hashCode methods
+	public void setClientid(int clientid) {
+		this.clientid = clientid;
+	}
 
-        // Getters and setters for id and username
+	
 
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        // equals, hashCode, and other methods
-    }
-}
+	
+} 

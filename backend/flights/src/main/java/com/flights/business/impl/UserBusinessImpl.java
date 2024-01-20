@@ -10,18 +10,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserBusinessImpl implements UserBusiness {
-
-    private final UserService userService;
-
-    public UserBusinessImpl(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userLoginService;
 
     @Override
-    public boolean loginUser(String username, String password) {
-        // Implement login logic using UserService
-        // For simplicity, assuming UserService provides a method like authenticateUser(username, password)
-        return userService.authenticateUser(username, password);
-    }
-}
+    public String validateCredentials(String username, String password) {
 
+	
+		  String msg = userLoginService.validateLoginCredentials(username, password);
+		  return msg;
+	}
+    
+}

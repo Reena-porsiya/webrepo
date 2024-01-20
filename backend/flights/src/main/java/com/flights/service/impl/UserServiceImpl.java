@@ -13,19 +13,21 @@ import com.flights.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
-
-    private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+public class UserServiceImpl implements UserService{
+	
+	@Autowired
+    private UserRepository userRepository;
 
     @Override
-    public boolean authenticateUser(String username, String password) {
-        // Implement user authentication logic using UserRepository
-        // For simplicity, assuming UserRepository provides a method like findByUsernameAndPassword
-        // You might want to handle password hashing and other security aspects in a real-world scenario
-        return userRepository.findByUsernameAndPassword(username, password).isPresent();
+    public String validateLoginCredentials(String username, String password) {
+        List<UserEntity> users = userRepository.findAll();
+        
+        for (UserEntity user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return "Login successfully";
+            }
+        }
+        
+        return "Invalid username or password";
     }
 }

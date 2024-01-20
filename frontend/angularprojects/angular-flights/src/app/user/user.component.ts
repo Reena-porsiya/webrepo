@@ -13,21 +13,30 @@ export class UserComponent {
   responseMessage: string;
 
   constructor(
-    private route: ActivatedRoute, 
-      private router: Router, 
-        private userService: UserService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService
+  ) {
     this.user = new User();
+    this.responseMessage = ''; 
   }
 
   onSubmit() {
-    this.userService.login(this.user).subscribe((response: any) => {
-      alert(response);
-      console.log(response)
-  },result => this.gotoUserList());
+    this.userService.login(this.user).subscribe(
+      (response: any) => {
+        this.responseMessage = 'User login successful'; 
+        console.log('Form submitted:', this.user);
+      },
+      (error) => {
+        this.responseMessage = 'Incorrect username or password'; 
+        console.error('Login failed:', error);
+      },
+      () => this.gotoUserList() 
+    );
   }
-  
+
   gotoUserList() {
+   
     this.router.navigate(['/user']);
-    
   }
 }

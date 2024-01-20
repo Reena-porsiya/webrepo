@@ -1,38 +1,26 @@
 package com.flights.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.flights.business.UserBusiness;
 
-@Controller
+@RestController
+@RequestMapping("/user")
+@CrossOrigin(origins="*")
 public class UserController {
-
-    private final UserBusiness userBusiness;
-
     @Autowired
-    public UserController(UserBusiness userBusiness) {
-        this.userBusiness = userBusiness;
-    }
+    private UserBusiness userBusiness;
 
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login";
+    @GetMapping("/getuserslogin")
+    public String validateLoginCredentials(String username, String password) {
+        String msg = userBusiness.validateCredentials(username, password);
+        return msg;
     }
-
-    @PostMapping("/login")
-    public String loginUser(String username, String password, Model model) {
-        // Call the login method from the business class
-        boolean loginSuccess = userBusiness.loginUser(username, password);
-
-        if (loginSuccess) {
-            return "redirect:/dashboard";
-        } else {
-            model.addAttribute("error", "Invalid credentials");
-            return "login";
-        }
-    }
+    
 }
