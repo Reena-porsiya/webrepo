@@ -9,12 +9,14 @@ import { CreateCountryComponent} from './create-country/create-country.component
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateCountryComponent,
-   UserComponent
+   UserComponent,
+   ClientDetailsComponent
   ],
   imports: [
    
