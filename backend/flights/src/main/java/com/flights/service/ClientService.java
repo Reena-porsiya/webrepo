@@ -1,10 +1,7 @@
 package com.flights.service;
 
-
-import com.flights.model.Client;
+import com.flights.entity.ClientEntity;
 
 public interface ClientService {
-	public Client getClientById(Long clientId);
-
-	
+    ClientEntity addClient(ClientEntity clientEntity);
 }

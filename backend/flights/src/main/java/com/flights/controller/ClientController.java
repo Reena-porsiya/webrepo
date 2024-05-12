@@ -1,42 +1,26 @@
 package com.flights.controller;
 
-
+import com.flights.entity.ClientEntity;
+import com.flights.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.flights.business.ClientBusiness;
-import com.flights.model.Client;
-import com.flights.service.ClientService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clients")
-@CrossOrigin(origins="*")
 public class ClientController {
 
-	     @Autowired
-	     private ClientBusiness clientBusiness;
+    private final ClientService clientService;
 
-	     @GetMapping("/{clientId}")
-	     public ResponseEntity<Client> getClientById(@PathVariable Long clientId) {
-	         Client client = clientBusiness.getClientById(clientId);
-	         if (client != null) {
-	             return new ResponseEntity<>(client, HttpStatus.OK);
-	         } else {
-	             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	         }
-	     }
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
-	    
-	 }
- 
-
-	    
-	
-
+    @PostMapping
+    public ResponseEntity<ClientEntity> addClient(@RequestBody ClientEntity clientEntity) {
+        ClientEntity savedClient = clientService.addClient(clientEntity);
+        return new ResponseEntity<>(savedClient, HttpStatus.CREATED);
+    }
+}
