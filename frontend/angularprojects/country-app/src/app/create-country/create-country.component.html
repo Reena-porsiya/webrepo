@@ -1,15 +1,13 @@
-<!-- create-country.component.html -->
 <div class="container">
   <h2>Create Country</h2>
   <form (ngSubmit)="onSubmit()">
-
     <div class="form-group">
       <label for="iataCountryCode">IATA Country Code:</label>
-      <input type="text" class="form-control" id="iataCountryCode" formControlName="iataCountryCode" required>
+      <input type="text" class="form-control" id="iataCountryCode" name="iataCountryCode" required [(ngModel)]="country.iataCountryCode">
     </div>
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" formControlName="name" required>
+      <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="country.name">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
