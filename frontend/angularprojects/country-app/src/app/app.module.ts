@@ -1,14 +1,13 @@
-// app.module.ts
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { CreateCountryComponent } from './create-country/create-country.component'; // Import CreateCountryComponent
+import { CreateCountryComponent } from './create-country/create-country.component'; // Ensure correct path
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateCountryComponent // Add CreateCountryComponent to declarations array
+    CreateCountryComponent  // Ensure it is declared here
   ],
   imports: [
     BrowserModule,
