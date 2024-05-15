@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="card col-md-6 offset-md-3">
+    <div class="row">
+      <h3 class="text-center"> Client Details </h3>
+      <hr />
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="clientId">Client ID:</label>
+            <input id="clientId" type="text" [(ngModel)]="clientId" name="clientId">
+          </div>
+          <button class="button" type="button" (click)="getClientDetails(clientId)">Get Client Details</button>
+        </form>
+
+        <div *ngIf="clientData">
+          <h3>Client Details</h3>
+          <ul>
+            <li><strong>Client ID:</strong> {{ clientData.clientId }}</li>
+            <li><strong>First Name:</strong> {{ clientData.firstName }}</li>
+            <li><strong>Last Name:</strong> {{ clientData.lastName }}</li>
+            <!-- Add other client details as needed -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

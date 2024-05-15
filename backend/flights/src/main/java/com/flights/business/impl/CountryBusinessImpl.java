@@ -17,4 +17,17 @@ public class CountryBusinessImpl implements CountryBusiness {
     public String createCountry(CountryEntity country) {
         return countryService.createCountry(country);
     }
+    @Override
+    public String updateCountry(CountryEntity country) {
+        countryService.updateCountry(country);
+        return "Country updated successfully";
+    }
+    @Override
+    public void deleteCountry(String iataCountryCode) {
+        countryService.deleteCountry(iataCountryCode);
+    }
+    @Override
+    public void deleteCountryByName(String name) {
+        countryService.deleteCountry(name);
+    }
 }

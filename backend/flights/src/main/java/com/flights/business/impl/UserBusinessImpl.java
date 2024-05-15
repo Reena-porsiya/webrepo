@@ -1,24 +1,24 @@
 package com.flights.business.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.flights.business.UserBusiness;
+import com.flights.entity.UserEntity;
 import com.flights.service.UserService;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserBusinessImpl implements UserBusiness {
-    @Autowired
-    private UserService userLoginService;
+
+    private  UserService userService;
+
+   
+    public UserBusinessImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
-    public String validateCredentials(String username, String password) {
-
-	
-		  String msg = userLoginService.validateLoginCredentials(username, password);
-		  return msg;
-	}
-    
+    public UserEntity getUserDetails(String username, String password) {
+        return userService.getUserByUsernameAndPassword(username, password);
+    }
 }

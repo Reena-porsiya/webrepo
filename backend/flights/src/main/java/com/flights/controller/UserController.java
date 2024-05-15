@@ -1,26 +1,34 @@
 package com.flights.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.flights.business.UserBusiness;
+import com.flights.entity.UserEntity;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class UserController {
-    @Autowired
-    private UserBusiness userBusiness;
 
-    @GetMapping("/getuserslogin")
-    public String validateLoginCredentials(String username, String password) {
-        String msg = userBusiness.validateCredentials(username, password);
-        return msg;
+    private final UserBusiness userBusiness;
+
+    public UserController(UserBusiness userBusiness) {
+        this.userBusiness = userBusiness;
     }
-    
+
+    @PostMapping("/getuserdetails")
+    public ResponseEntity<?> getUserDetails(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+
+        UserEntity user = userBusiness.getUserDetails(username, password);
+
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
+    }
 }

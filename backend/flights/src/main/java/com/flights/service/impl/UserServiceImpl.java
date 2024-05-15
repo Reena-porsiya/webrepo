@@ -1,33 +1,22 @@
 package com.flights.service.impl;
-
-import java.util.List;
-
+import com.flights.entity.UserEntity;
+import com.flights.Repository.UserRepository;
+import com.flights.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.flights.Repository.UserRepository;
-import com.flights.entity.UserEntity;
-import com.flights.service.UserService;
-
-
-import org.springframework.stereotype.Service;
-
 @Service
-public class UserServiceImpl implements UserService{
-	
-	@Autowired
-    private UserRepository userRepository;
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
-    public String validateLoginCredentials(String username, String password) {
-        List<UserEntity> users = userRepository.findAll();
-        
-        for (UserEntity user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return "Login successfully";
-            }
-        }
-        
-        return "Invalid username or password";
+    public UserEntity getUserByUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 }

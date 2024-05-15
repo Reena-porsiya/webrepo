@@ -1,6 +1,9 @@
 package com.flights.service;
 
+import com.flights.entity.UserEntity;
+
+
 
 public interface UserService {
-	String validateLoginCredentials(String username, String password);
-	}
+    UserEntity getUserByUsernameAndPassword(String username, String password);
+}

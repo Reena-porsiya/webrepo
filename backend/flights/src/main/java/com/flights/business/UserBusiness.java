@@ -1,5 +1,6 @@
 package com.flights.business;
 
+import com.flights.entity.UserEntity;
 public interface UserBusiness {
-	public String validateCredentials(String username, String password);
+    UserEntity getUserDetails(String username, String password);
 }
