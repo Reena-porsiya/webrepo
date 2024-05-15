@@ -44,18 +44,24 @@ export class FlightDetailsComponent implements OnInit {
   updateFlight(): void {
     this.message = '';
 
-    this.flightService
-      .update(this.currentFlight.iataCountryCode, this.currentFlight)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : 'This country was updated successfully!';
-        },
-        error: (e) => console.error(e)
-      });
-  }
+    // Check if iataCountryCode is defined
+    if (this.currentFlight.iataCountryCode) {
+        this.flightService
+            .update(this.currentFlight.iataCountryCode, this.currentFlight)
+            .subscribe({
+                next: (res) => {
+                    console.log(res);
+                    this.message = res.message
+                        ? res.message
+                        : 'This country was updated successfully!';
+                },
+                error: (e) => console.error(e)
+            });
+    } else {
+        console.error('iataCountryCode is undefined');
+    }
+}
+
 
   deleteFlight(): void {
     this.flightService.delete(this.currentFlight.iataCountryCode).subscribe({

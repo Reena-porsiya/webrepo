@@ -32,7 +32,7 @@ update(iataCountryCode: string, data: any): Observable<any> {
   return this.http.put(`${baseUrl}/update/${iataCountryCode}`, data);
 }
 get(iataCountryCode: any): Observable<Flight> {
-  return this.http.get<Flight>(`${getUrl}/${iataCountryCode}`);
+  return this.http.get<Flight>(`${baseUrl}/get/${iataCountryCode}`);
 }
 
 delete(iataCountryCode: any): Observable<any> {

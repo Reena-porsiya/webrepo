@@ -36,9 +36,15 @@ public class CountryController {
         return countryService.getAllCountry();
     }
     
+    @GetMapping("/get/{iata_country_code}")
+   public CountryEntity getCountryByIataCountryCode(@PathVariable("iata_country_code") String iataCountryCode){
+    	return countryService.getCountryByIataCountryCode(iataCountryCode);
+   }
+    
     @PutMapping("/update/{iata_country_code}")
     public ResponseEntity<String> updateCountry(@PathVariable("iata_country_code") String iataCountryCode, @RequestBody CountryEntity country) {
         // Check if the country with the given iata_country_code exists
+    	System.out.println("DHDHDHDHH");
         if (!countryService.existsById(iataCountryCode)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Country not found with IATA Country Code: " + iataCountryCode);
         }
@@ -56,7 +62,7 @@ public class CountryController {
     }
     @DeleteMapping("/delete/{iata_country_code}")
     public ResponseEntity<String> deleteCountry(@PathVariable("iata_country_code") String iataCountryCode) {
-        // Check if the country with the given iata_country_code exists
+        
         if (!countryService.existsById(iataCountryCode)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Country not found with IATA Country Code: " + iataCountryCode);
         }
@@ -64,14 +70,14 @@ public class CountryController {
         countryService.deleteCountry(iataCountryCode);
         return ResponseEntity.status(HttpStatus.OK).body("Country deleted successfully");
     }
-    @DeleteMapping("/delete/{name}")
-    public ResponseEntity<String> deleteCountryByName(@PathVariable("name") String name) {
-        // Check if the country with the given iata_country_code exists
-//        if (!countryService.existsById(name)) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Country not found with IATA Country Code: " + iataCountryCode);
-//        }
-
-        countryService.deleteCountryByName(name);
-        return ResponseEntity.status(HttpStatus.OK).body("Country deleted successfully");
-    }
+//    @DeleteMapping("/delete/{name}")
+//    public ResponseEntity<String> deleteCountryByName(@PathVariable("name") String name) {
+//        // Check if the country with the given iata_country_code exists
+////        if (!countryService.existsById(name)) {
+////            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Country not found with IATA Country Code: " + iataCountryCode);
+////        }
+//
+//        countryService.deleteCountryByName(name);
+//        return ResponseEntity.status(HttpStatus.OK).body("Country deleted successfully");
+//    }
 }

@@ -1,5 +1,5 @@
 @if (viewMode){
-  @if (currentFlight.iataCountryCode){
+  @if (this.currentFlight.iataCountryCode){
     <h4>Flight</h4>
     <div>
       <label><strong>IATA Country Code:</strong></label> {{ currentFlight.iataCountryCode }}
@@ -7,7 +7,7 @@
     <div>
       <label><strong>Name:</strong></label> {{ currentFlight.name }}
     </div>
-<a class="badge badge-warning" routerLink="/flights/{{ currentFlight.iataCountryCode }}">
+<a class="badge badge-warning" routerLink="/flight/{{ currentFlight.iataCountryCode }}">
       Edit
     </a>
     <button class="badge badge-danger mr-2" (click)="deleteFlight()">
@@ -43,11 +43,6 @@
       <button class="badge badge-danger mr-2" (click)="deleteFlight()">
         Delete
       </button>
-
-      <!-- <div class="form-group">
-        <label><strong>Status:</strong></label>
-        {{ currentFlight.published ? "Published" : "Pending" }}
-      </div> -->
     </form>
 
     <button

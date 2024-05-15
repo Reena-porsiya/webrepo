@@ -44,4 +44,9 @@ public class CountryServiceImpl implements CountryService {
     public void deleteCountryByName(String name) {
         countryRepository.deleteById(name);
     }
+    
+    @Override
+    public CountryEntity getCountryByIataCountryCode(String iataCountryCode) {
+    	return countryRepository.findById(iataCountryCode).get();
+    }
 }
