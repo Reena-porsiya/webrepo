@@ -21,7 +21,7 @@ export class FlightService {
 
 
   create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    return this.http.post(`${baseUrl}/create`, data);
   }
 
   getAll(): Observable<Flight[]> {
