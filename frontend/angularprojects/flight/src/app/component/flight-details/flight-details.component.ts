@@ -54,6 +54,9 @@ export class FlightDetailsComponent implements OnInit {
                     this.message = res.message
                         ? res.message
                         : 'This country was updated successfully!';
+
+                        this.router.navigate(['get']);
+                        //this.goToFlightsList();
                 },
                 error: (e) => console.error(e)
             });
@@ -72,4 +75,5 @@ export class FlightDetailsComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
+  
 }

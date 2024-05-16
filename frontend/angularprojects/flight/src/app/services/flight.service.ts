@@ -6,7 +6,6 @@ import { Flight } from '../models/flight.model';
 
  const baseUrl = 'http://localhost:8080/country';
  const getUrl = 'http://localhost:8080/country/get';
- const updateUrl = "http://localhost:8080/country/update";
  const deleteUrl = "http://localhost:8080/country/delete";
 
  

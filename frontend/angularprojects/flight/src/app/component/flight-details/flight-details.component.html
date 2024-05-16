@@ -1,19 +1,20 @@
 @if (viewMode){
   @if (this.currentFlight.iataCountryCode){
-    <h4>Flight</h4>
+    <h4>Country</h4>
     <div>
       <label><strong>IATA Country Code:</strong></label> {{ currentFlight.iataCountryCode }}
     </div>
     <div>
       <label><strong>Name:</strong></label> {{ currentFlight.name }}
     </div>
-<a class="badge badge-warning" routerLink="/flight/{{ currentFlight.iataCountryCode }}">
+    <a class="badge badge-warning mr-2" routerLink="/flight/{{ currentFlight.iataCountryCode }}">
       Edit
     </a>
     <button class="badge badge-danger mr-2" (click)="deleteFlight()">
       Delete
     </button>
-  } @else {<p>Please click on a Flight...</p>}
+    
+  } @else { <p>Please click on a Country...If you want to Edit or Delete</p>}
 } @else {
   @if (currentFlight.iataCountryCode) {
   <div class="edit-form">
@@ -40,9 +41,7 @@
         />
       </div>
 
-      <button class="badge badge-danger mr-2" (click)="deleteFlight()">
-        Delete
-      </button>
+      
     </form>
 
     <button
@@ -53,7 +52,7 @@
     </button>
     <p>{{ message }}</p>
   </div>
-  } @else {<p>Cannot access this Flight...</p>}
+  } @else {<p>Cannot access this Country...</p>}
 }
   
   

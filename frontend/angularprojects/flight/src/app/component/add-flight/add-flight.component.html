@@ -1,36 +1,96 @@
-<p>add-flight works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Flight Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+    }
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .form-control {
+      border-radius: 5px;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+    }
+    .btn-submit:hover {
+      background-color: #218838;
+    }
+    .success-message {
+      font-size: 1.2em;
+      color: #28a745;
+      text-align: center;
+    }
+    .add-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .add-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
 
-<div>
-    <div class="submit-form">
-      @if (!submitted) {
-      <div class="form-group">
+  <div class="container mt-5">
+    <div class="form-container">
+      <p class="text-center mb-4">Add County</p>
 
-        <label for="iata_country_code">Iata_country_code</label>
-        <input
-          type="text"
-          class="form-control"
-          id="iata_country_code"
-          required
-          [(ngModel)]="flight.iataCountryCode"
-          name="iata_country_code"
-        />
-      </div>
-  
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input
-          class="form-control"
-          id="name"
-          required
-          [(ngModel)]="flight.name"
-          name="name"
-        />
-      </div>
-  
-      <button (click)="saveFlight()" class="btn btn-success">Submit</button>
-      } @else {
-      <h4>Flight was submitted successfully!</h4>
-      <button class="btn btn-success" (click)="newFlight()">Add</button>
-      }
+      <ng-container *ngIf="!submitted; else submittedTemplate">
+        <div class="form-group">
+          <label for="iata_country_code">IATA Country Code</label>
+          <input type="text" class="form-control" id="iata_country_code" required [(ngModel)]="flight.iataCountryCode" name="iata_country_code" />
+        </div>
+    
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input class="form-control" id="name" required [(ngModel)]="flight.name" name="name" />
+        </div>
+    
+        <button (click)="saveFlight()" class="btn btn-submit">Submit</button>
+      </ng-container>
+
+      <ng-template #submittedTemplate>
+        <div class="success-message">Flight was submitted successfully!</div>
+        <button class="btn add-button" (click)="newFlight()">Add Another</button>
+      </ng-template>
     </div>
   </div>
+
+  <!-- Bootstrap JS (Optional, if you need JavaScript functionality) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

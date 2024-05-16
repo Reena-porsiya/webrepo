@@ -14,38 +14,28 @@ flight:Flight = {
   iataCountryCode: '',
   name: ''
 };
-submitted = false;
- 
+submitted: boolean = false;
+error: boolean = false;
 
 constructor(private flightService: FlightService) {}
 
-saveFlight():void {
-  const data = {
-    iataCountryCode: this.flight.iataCountryCode,
-    name: this.flight.name
-  };
-  console.log(data);
-  this.flightService.create(data).subscribe({
-    next: (res) => {
-      console.log(res);
-      console.log('Name:', this.flight.name);
-      console.log('IATA Country Code:', this.flight.iataCountryCode);
+saveFlight(): void {
+  this.flightService.create(this.flight).subscribe({
+    next: () => {
       this.submitted = true;
+      this.error = false;
+      this.flight = { iataCountryCode: '', name: '' }; 
     },
-    error: (e) => console.error(e)
+    error: () => {
+      this.submitted = true;
+      this.error = false;
+    }
   });
-
-}
-newFlight():void {
-    this.submitted = false;
-    this.flight = {
-      iataCountryCode: '',
-      name: '',
-     
-    };
-  }
-
-
 }
 
-
+newFlight(): void {
+  this.submitted = false;
+  this.error = false;
+  this.flight = { iataCountryCode: '', name: '' }; 
+}
+}
